@@ -1,0 +1,45 @@
+#app
+server:
+  port: 9122
+
+#spring
+spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: false
+
+  application:
+      name: MangoTranslate
+  thymeleaf:
+    cache: false
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://123.57.77.200:3306/mango_translate?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+    username: root
+    password: noob@523#715
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 30
+      idle-timeout: 60000
+      max-lifetime: 1200000
+      connection-timeout: 10000
+      connection-test-query: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: MYSQL
+    show-sql: true
+    properties:
+      hibernate.id.new_generator_mappings: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+
+
+noobug:
+  loginToken: wow_translate!
