@@ -22,7 +22,7 @@ public class MenuGossipTranslation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    Long menu_id;
+    Long menuId;
 
     String author;
 

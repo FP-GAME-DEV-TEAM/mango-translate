@@ -15,7 +15,7 @@
     <div class="row" style="text-align: center;">
         <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
             欢迎,<span th:text="${session.user}"></span>。
-            <a th:href="@{/main}" >返回首页</a>
+            <a th:href="@{/home}" >返回首页</a>
 
             <br/><br/><br/>
             <table class="table table-striped">
@@ -54,6 +54,20 @@
                     <p style="font-weight: bold;">我的翻译：</p>
                     <input id="inputId" name="id" type="hidden" />
                     <textarea class="form-control" name="translation" id="inputTranslation"></textarea>
+                    <br/>
+                    <p style="font-weight: bold;">近期提交：</p>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>译文</th>
+                                <th>作者</th>
+                            </tr>
+                        </thead>
+                        <tbody id="boxRecentTranslation">
+
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
@@ -74,6 +88,27 @@
 
                 $("#inputId").val(id);
                 $("#textContent").text(content);
+
+                $.ajax({
+                    url:"/ajax/getMenuGossipRecentTranslation",
+                    data:{
+                        id: id,
+                    },
+                    dataType:"json",
+                    success: function(res){
+                        if(res.success){
+                            var html = "";
+                            res.data.forEach(function (d) {
+                                html += "<tr>";
+                                html += "<td>" + CountAgo(d.time) + "</td>";
+                                html += "<td>" + d.translation + "</td>";
+                                html += "<td>" + d.author + "</td>";
+                                html += "</tr>";
+                            });
+                            $("#boxRecentTranslation").html(html);
+                        }
+                    }
+                });
 
                 $("#modalTranslate").modal({});
             });

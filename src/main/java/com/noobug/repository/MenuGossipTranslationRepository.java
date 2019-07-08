@@ -3,6 +3,8 @@ package com.noobug.repository;
 import com.noobug.domain.MenuGossipTranslation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MenuGossipTranslationRepository extends JpaRepository<MenuGossipTranslation, Long> {
+import java.util.List;
 
+public interface MenuGossipTranslationRepository extends JpaRepository<MenuGossipTranslation, Long> {
+    List<MenuGossipTranslation> findTop5ByMenuIdOrderByTimeDesc(Long id);
 }
